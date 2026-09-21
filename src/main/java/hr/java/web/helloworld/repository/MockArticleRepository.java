@@ -38,4 +38,13 @@ public class MockArticleRepository implements ArticleRepository {
                 .filter(a -> a.getName().toLowerCase().contains(articleName.toLowerCase()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Hardware> getArticlesById(Integer brandId) {
+        /*
+        return hardwareList.stream()
+                .filter(a -> a.getId().compareTo(brandId))
+         */
+        return hardwareList.contains(brandId) ? hardwareList : null;
+    }
 }

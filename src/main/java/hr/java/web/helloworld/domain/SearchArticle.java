@@ -14,18 +14,6 @@ public class SearchArticle extends Hardware {
     private BigDecimal lowerPrice;
     private BigDecimal upperPrice;
 
-    /*
-    public SearchArticle(String articleName,
-                         BigDecimal code,
-                         BigDecimal lowerPrice,
-                         BigDecimal upperPrice,
-                         String typeName)
-    {
-        this(articleName, code, lowerPrice, upperPrice, typeName);
-        super.setId(id);
-    }
-     */
-
     public SearchArticle(String articleName,
                          BigDecimal code,
                          BigDecimal lowerPrice,

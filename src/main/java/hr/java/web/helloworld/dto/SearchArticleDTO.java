@@ -1,7 +1,5 @@
 package hr.java.web.helloworld.dto;
 
-import com.fasterxml.jackson.core.io.doubleparser.JavaBigDecimalParser;
-import hr.java.web.helloworld.domain.Category;
 import lombok.*;
 
 import java.math.BigDecimal;
