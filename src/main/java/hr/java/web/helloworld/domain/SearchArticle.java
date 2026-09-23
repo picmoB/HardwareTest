@@ -26,5 +26,4 @@ public class SearchArticle extends Hardware {
         this.upperPrice = upperPrice;
         super.setType(typeName);
     }
-
 }

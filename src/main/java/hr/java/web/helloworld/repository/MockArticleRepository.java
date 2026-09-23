@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -41,10 +42,47 @@ public class MockArticleRepository implements ArticleRepository {
 
     @Override
     public List<Hardware> getArticlesById(Integer brandId) {
-        /*
         return hardwareList.stream()
-                .filter(a -> a.getId().compareTo(brandId))
-         */
-        return hardwareList.contains(brandId) ? hardwareList : null;
+                .filter(a -> a.getId().equals(brandId))
+                .collect(Collectors.toList());
+        // return hardwareList.contains(brandId) ? hardwareList : null;
+    }
+
+    @Override
+    public Integer saveNewArticle(Hardware hardware) {
+        if (hardwareList.contains(hardware)) {
+            return hardwareList.indexOf(hardware);
+        } else  {
+            hardwareList.add(hardware);
+        }
+        return hardwareList.size();
+    }
+
+    @Override
+    public Optional<Hardware> updateArticle(Hardware hardware, Integer brandId) {
+        Optional<Hardware> optionalHardware = hardwareList.stream().filter(a -> a.getId().equals(brandId)).findFirst();
+        if (optionalHardware.isPresent()) {
+            Hardware updateHardware = optionalHardware.get();
+            updateHardware.setName(hardware.getName());
+            updateHardware.setType(hardware.getType());
+            updateHardware.setPrice(hardware.getPrice());
+            updateHardware.setCode(hardware.getCode());
+
+            return Optional.of(updateHardware);
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean articleByIdExists(Integer id) {
+        return hardwareList.contains(id);
+    }
+
+    @Override
+    public boolean deleteArticleById(Integer id) {
+        // return hardwareList.remove(id);
+
+        return hardwareList.removeIf(a -> a.getId().equals(id));
     }
 }

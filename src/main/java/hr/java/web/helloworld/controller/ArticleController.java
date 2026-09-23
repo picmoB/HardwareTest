@@ -28,30 +28,31 @@ public class ArticleController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Void> addArticle(@RequestBody HardwareDTO hardwareDTO) {
+    public ResponseEntity<Void> addArticle(@Validated @RequestBody HardwareDTO hardwareDTO) {
         articleService.saveNewArticle(hardwareDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/article/{articleId}")
-    public ResponseEntity<HardwareDTO> updateArticle(@PathVariable Integer articleId, @RequestBody HardwareDTO hardwareDTO) {
+    @PutMapping("/article/update/{articleId}")
+    public ResponseEntity<HardwareDTO> updateArticle(@PathVariable Integer articleId, @Validated @RequestBody HardwareDTO hardwareDTO) {
         if (articleService.articleByIdExists(articleId)) {
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } else  {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            articleService.updateArticle(hardwareDTO, articleId);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/article/{articleId}")
+    @DeleteMapping("/article/delete/{articleId}")
     public ResponseEntity<?> deleteArticle(@PathVariable Integer articleId) {
         if (articleService.articleByIdExists(articleId)) {
             boolean result = articleService.deleteArticleById(articleId);
             if (result) {
                 return new ResponseEntity<>(HttpStatus.OK);
-            } else  {
+            } else {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-        } else  {
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
