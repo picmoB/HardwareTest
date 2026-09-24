@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface ArticleRepository {
     List<Hardware> getAllArticles();
     List<Hardware> getArticlesByName(String articleName);
-    List<Hardware> getArticlesById(Integer brandId);
-    Integer saveNewArticle(Hardware hardware);
+    Optional<Hardware> getArticlesById(Integer brandId);
+    Hardware saveNewArticle(Hardware hardware);
     /*
     void saveNewArticle(Hardware article);
     List<Hardware> filterByParameters(SearchArticle searchArticle);

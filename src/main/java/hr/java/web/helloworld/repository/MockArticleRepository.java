@@ -41,7 +41,7 @@ public class MockArticleRepository implements ArticleRepository {
     }
 
     @Override
-    public List<Hardware> getArticlesById(Integer brandId) {
+    public Optional<Hardware> getArticlesById(Integer brandId) {
         return hardwareList.stream()
                 .filter(a -> a.getId().equals(brandId))
                 .collect(Collectors.toList());
@@ -49,7 +49,7 @@ public class MockArticleRepository implements ArticleRepository {
     }
 
     @Override
-    public Integer saveNewArticle(Hardware hardware) {
+    public Hardware saveNewArticle(Hardware hardware) {
         if (hardwareList.contains(hardware)) {
             return hardwareList.indexOf(hardware);
         } else  {
